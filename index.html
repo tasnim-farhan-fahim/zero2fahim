@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero2Fahim Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Zen+Kurenaido&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px !important;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f9a8d4, #a78bfa, #60a5fa);
+            font-family: 'Zen Kurenaido', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+            position: relative;
+            padding-top: 3.5rem;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://source.unsplash.com/1920x1080/?anime') no-repeat center/cover;
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        nav h1 {
+            display: flex;
+            flex-direction: row;
+            gap: 0.5rem;
+        }
+
+        .nav-bar {
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid #f472b6;
+        }
+
+        .nav-link, .mobile-nav a {
+            color: #fff;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-link:hover, .mobile-nav a:hover {
+            background: #f472b6;
+            transform: scale(1.1);
+        }
+
+        .nav-link.active, .mobile-nav a.active {
+            background: rgba(244, 114, 182, 0.5);
+            transform: scale(1.05);
+        }
+
+        .section {
+            min-height: 90vh;
+            padding: 3rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            margin: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .speech-bubble {
+            background: #fff;
+            border: 2px solid #f472b6;
+            border-radius: 15px;
+            padding: 1.5rem;
+            position: relative;
+            margin: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50px;
+            border: 10px solid transparent;
+            border-top: 10px solid #fff;
+        }
+
+        .portfolio-card, .skill-card, .blog-card {
+            background: #fefcbf;
+            border: 3px solid #f472b6;
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-card:hover, .skill-card:hover, .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .portfolio-card::before, .skill-card::before, .blog-card::before {
+            content: '🌟';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            animation: sparkle 1.2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .btn {
+            background: #f472b6;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #db2777;
+            box-shadow: 0 0 15px #db2777;
+        }
+
+        .contact-form input, .contact-form textarea {
+            background: #fefcbf;
+            border: 2px solid #f472b6;
+            border-radius: 10px;
+            padding: 0.75rem;
+            color: #333;
+            font-family: 'Comic Neue', sans-serif;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: #db2777;
+            outline: none;
+        }
+
+        .social-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.2);
+        }
+
+        /* Mobile Navigation Styles */
+        @media (max-width: 768px) {
+            html {
+                scroll-padding-top: 100px !important;
+            }
+
+            body {
+                padding-top: 4.5rem;
+            }
+            .section {
+                min-height: 88vh;
+            }
+            
+            .nav-bar {
+                text-align: center;
+                padding: 1rem 0;
+            }
+
+            .nav-links {
+                display: none !important;
+            }
+
+            .mobile-nav {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                right: 5px;
+                z-index: 1000;
+                /* background: rgba(0, 0, 0, 0.2); */
+                /* border-radius: 1rem; */
+                padding: 0px 2px;
+            }
+
+            .mobile-nav a {
+                margin: 0.5rem;
+                padding: 0.5rem;
+            }
+
+            .mobile-nav i {
+                font-size: 1.2rem;
+                color: rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar fixed top-0 w-full z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-white flex items-center">
+                <img src="nav-cartoon-cat.gif" alt="Anime You" class="rounded-full border-0 w-8">
+                <p><span class="text-pink-100">zero</span><span class="text-pink-200">2</span><span class="text-pink-300">fahim</span></p>
+            </h1>
+            <div class="nav-links flex space-x-4">
+                <a href="#home" class="nav-link"><i class="fas fa-home mr-1"></i> Home</a>
+                <a href="#about" class="nav-link"><i class="fas fa-user mr-1"></i> About</a>
+                <a href="#skills" class="nav-link"><i class="fas fa-code mr-1"></i> Skills</a>
+                <a href="#portfolio" class="nav-link"><i class="fas fa-briefcase mr-1"></i> Portfolio</a>
+                <a href="#blog" class="nav-link"><i class="fas fa-blog mr-1"></i> Blog</a>
+                <a href="#contact" class="nav-link"><i class="fas fa-envelope mr-1"></i> Contact</a>
+                <a href="#social" class="nav-link"><i class="fas fa-share-alt mr-1"></i> Social</a>
+            </div>
+            <div class="mobile-nav">
+                <a href="#home" class="nav-link"><i class="fas fa-home"></i></a>
+                <a href="#about" class="nav-link"><i class="fas fa-user"></i></a>
+                <a href="#skills" class="nav-link"><i class="fas fa-code"></i></a>
+                <a href="#portfolio" class="nav-link"><i class="fas fa-briefcase"></i></a>
+                <a href="#blog" class="nav-link"><i class="fas fa-blog"></i></a>
+                <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i></a>
+                <a href="#social" class="nav-link"><i class="fas fa-share-alt"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section">
+        <div class="text-center">
+            <div class="speech-bubble max-w-2xl">
+                <h2 id="greeting" class="text-5xl font-bold mb-4 animate-text">Konnichiwa, Adventurer!</h2>
+                <p class="text-xl mb-6">Welcome to the Guild! Where tech, anime, and gaming collide in epic creations!</p>
+            </div>
+            <a href="#portfolio" class="btn">Join the Adventure!</a>
+            <!-- <img src="https://source.unsplash.com/150x150/?anime,character" alt="Chibi Hero" class="absolute bottom-4 right-4 w-24 md:w-32 opacity-80"> -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-8">Meet Your Code Alchemist</h2>
+            <div class="flex justify-center flex-col md:flex-row items-center">
+                <img src="cartoon-cat.gif" alt="Anime You" class="rounded-full border-4 border-f472b6 mb-4 md:mb-0 md:mr-8 w-48 md:w-64">
+                <div class="speech-bubble max-w-lg">
+                    <p class="text-lg">
+                        Yo! I’m a CS undergrad crafting websites and apps with Python, JS, HTML, CSS, C, Java, and SQL. I’m obsessed with anime and *Genshin Impact*, always chasing new adventures in tech and gaming. My projects blend vibrant anime vibes with cutting-edge code—let’s explore new worlds together!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-8">My Tech Arsenal</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="skill-card text-center">
+                    <h3 class="text-xl font-bold">Python</h3>
+                    <p>Apps & scripts</p>
+                </div>
+                <div class="skill-card text-center">
+                    <h3 class="text-xl font-bold">JavaScript</h3>
+                    <p>Dynamic web</p>
+                </div>
+                <div class="skill-card text-center">
+                    <h3 class="text-xl font-bold">HTML/CSS</h3>
+                    <p>Anime-style UI</p>
+                </div>
+                <div class="skill-card text-center">
+                    <h3 class="text-xl font-bold">C</h3>
+                    <p>System programming</p>
+                </div>
+                <div class="skill-card text-center">
+                    <h3 class="text-xl font-bold">Java</h3>
+                    <p>Robust apps</p>
+                </div>
+                <div class="skill-card text-center">
+                    <h3 class="text-xl font-bold">SQL</h3>
+                    <p>Database mastery</p>
+                </div>
+                <div class="skill-card text-center">
+                    <h3 class="text-xl font-bold">Git</h3>
+                    <p>Version control</p>
+                </div>
+                <div class="skill-card text-center">
+                    <h3 class="text-xl font-bold">Web Dev</h3>
+                    <p>Full-stack magic</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-8">My Epic Creations</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="portfolio-card">
+                    <img src="https://source.unsplash.com/300x200/?web,design" alt="Anime UI" class="w-full rounded-lg mb-4">
+                    <h3 class="text-xl font-bold">Anime Portfolio Site</h3>
+                    <p>Vibrant web UI with JS animations and Tailwind CSS.</p>
+                </div>
+                <div class="portfolio-card">
+                    <img src="https://source.unsplash.com/300x200/?game,art" alt="Game Demo" class="w-full rounded-lg mb-4">
+                    <h3 class="text-xl font-bold">Chibi RPG Demo</h3>
+                    <p>Java-based game with anime-inspired sprites.</p>
+                </div>
+                <div class="portfolio-card">
+                    <img src="https://source.unsplash.com/300x200/?app,ui" alt="Tracker" class="w-full rounded-lg mb-4">
+                    <h3 class="text-xl font-bold">Anime Watchlist App</h3>
+                    <p>Python + SQL app for tracking anime.</p>
+                </div>
+                <div class="portfolio-card">
+                    <img src="https://source.unsplash.com/300x200/?ecommerce,store" alt="Ecommerce" class="w-full rounded-lg mb-4">
+                    <h3 class="text-xl font-bold">Anime Merch Store</h3>
+                    <p>Full-stack e-commerce site with JS and SQL.</p>
+                </div>
+                <div class="portfolio-card">
+                    <img src="https://source.unsplash.com/300x200/?api,code" alt="API" class="w-full rounded-lg mb-4">
+                    <h3 class="text-xl font-bold">Genshin API Wrapper</h3>
+                    <p>Python API for fetching *Genshin Impact* data.</p>
+                </div>
+                <div class="portfolio-card">
+                    <img src="https://source.unsplash.com/300x200/?chat,app" alt="Chat" class="w-full rounded-lg mb-4">
+                    <h3 class="text-xl font-bold">Anime Chat App</h3>
+                    <p>Real-time chat app with Node.js and WebSocket.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="section">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-8">My Adventure Log</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="blog-card">
+                    <h3 class="text-xl font-bold">Binging Anime Like a Pro</h3>
+                    <p>My top picks and why I love diving into new series!</p>
+                    <a href="#" class="text-f472b6">Read More</a>
+                </div>
+                <div class="blog-card">
+                    <h3 class="text-xl font-bold">*Genshin Impact* Grinding Tips</h3>
+                    <p>How I max out characters and enjoy Teyvat’s world.</p>
+                    <a href="#" class="text-f472b6">Read More</a>
+                </div>
+                <div class="blog-card">
+                    <h3 class="text-xl font-bold">Exploring New Tech</h3>
+                    <p>From AI tools to new frameworks, I’m always experimenting!</p>
+                    <a href="#" class="text-f472b6">Read More</a>
+                </div>
+                <div class="blog-card">
+                    <h3 class="text-xl font-bold">Anime Chat App Update</h3>
+                    <p>Added new features to my chat app—check it out!</p>
+                    <a href="#" class="text-f472b6">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-8">Send a Guild Message!</h2>
+            <div class="max-w-md mx-auto contact-form">
+                <div class="speech-bubble mb-4">
+                    <input type="text" placeholder="Your Name" class="w-full">
+                </div>
+                <div class="speech-bubble mb-4">
+                    <input type="email" placeholder="Your Email" class="w-full">
+                </div>
+                <div class="speech-bubble mb-4">
+                    <textarea placeholder="Your Message" rows="5" class="w-full"></textarea>
+                </div>
+                <button class="btn w-full">Send Message!</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Section -->
+    <section id="social" class="section">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-8">Join My Squad!</h2>
+            <div class="flex justify-center flex-wrap">
+                <a href="https://www.facebook.com/zero2fahim/" target="_blank" class="social-icon">
+                    <i class="fab fa-facebook-f w-12 h-12 flex items-center justify-center text-2xl text-f472b6"></i>
+                </a>
+                <a href="https://www.instagram.com/zero2fahim/" target="_blank" class="social-icon">
+                    <i class="fab fa-instagram w-12 h-12 flex items-center justify-center text-2xl text-f472b6"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/tasnim-farhan-fahim/" target="_blank" class="social-icon">
+                    <i class="fab fa-linkedin-in w-12 h-12 flex items-center justify-center text-2xl text-f472b6"></i>
+                </a>
+                <a href="https://github.com/tasnim-farhan-fahim" target="_blank" class="social-icon">
+                    <i class="fab fa-github w-12 h-12 flex items-center justify-center text-2xl text-f472b6"></i>
+                </a>
+                <a href="https://x.com/Zero2Fahim" target="_blank" class="social-icon">
+                    <i class="fab fa-x-twitter w-12 h-12 flex items-center justify-center text-2xl text-f472b6"></i>
+                </a>
+                <a href="https://www.youtube.com/@Zero2Fahim" target="_blank" class="social-icon">
+                    <i class="fab fa-youtube w-12 h-12 flex items-center justify-center text-2xl text-f472b6"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black bg-opacity-80 py-4 text-center text-white">
+        <p>© 2025 zero2fahim. Crafted with 🌸 & 🔥</p>
+    </footer>
+
+    <script>
+        // Dynamic mobile nav top position
+        function setMobileNavTop() {
+            const mobileNav = document.querySelector('.mobile-nav');
+            if (window.innerWidth <= 768) {
+                const deviceHeight = window.innerHeight;
+                const topValue = (deviceHeight / 900) * 250; // Scale top based on 250px for 900px height
+                mobileNav.style.top = `${topValue}px`;
+            }
+        }
+
+        // Run on load and resize
+        window.addEventListener('load', setMobileNavTop);
+        window.addEventListener('resize', setMobileNavTop);
+
+        // Language cycling for greeting
+        const greetings = [
+            "Hello, Adventurer!",
+            "こんにちは、アドベンチャー！",
+            "¡Hola, Aventurero!",
+            "Bonjour, Aventurier !",
+            "Hallo, Abenteurer!",
+            "Ciao, Avventuriero!",
+            "Привет, Искатель приключений!",
+            "안녕하세요, 모험가님!",
+            "Olá, Aventureiro!",
+            "你好，冒险者！"
+        ];
+        let currentGreeting = 0;
+        const greetingElement = document.getElementById('greeting');
+
+        function cycleGreeting() {
+            anime({
+                targets: greetingElement,
+                opacity: [1, 0],
+                easing: 'easeInOutQuad',
+                duration: 500,
+                complete: () => {
+                    greetingElement.textContent = greetings[currentGreeting];
+                    anime({
+                        targets: greetingElement,
+                        opacity: [0, 1],
+                        easing: 'easeInOutQuad',
+                        duration: 500
+                    });
+                    currentGreeting = (currentGreeting + 1) % greetings.length;
+                }
+            });
+        }
+
+        setInterval(cycleGreeting, 3000);
+
+        // Smooth scrolling (handled by CSS scroll-behavior)
+
+        // Active nav effect
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function setActiveNav() {
+            let currentSection = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 100 && window.scrollY < sectionTop + sectionHeight - 100) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', setActiveNav);
+        window.addEventListener('load', setActiveNav);
+
+        // Anime.js animations
+        anime({
+            targets: '.animate-text',
+            scale: [0.8, 1],
+            opacity: [0, 1],
+            easing: 'easeOutElastic(1, .6)',
+            duration: 1200
+        });
+
+        anime({
+            targets: '.speech-bubble, .portfolio-card, .skill-card, .blog-card',
+            translateY: [30, 0],
+            opacity: [0, 1],
+            easing: 'easeOutExpo',
+            duration: 800,
+            delay: anime.stagger(150)
+        });
+
+        anime({
+            targets: '.social-icon',
+            translateY: [20, 0],
+            opacity: [0, 1],
+            easing: 'easeOutExpo',
+            duration: 1000,
+            delay: anime.stagger(200)
+        });
+    </script>
+</body>
+</html>
